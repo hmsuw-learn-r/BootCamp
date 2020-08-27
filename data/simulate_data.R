@@ -31,4 +31,4 @@ group_id <- factor(rep(1:num_groups, each=num_points))
 # create and save data frame
 # ------------------------------------------------------------------------------
 df <- data.frame(y, y_se, x, group_id)
-write.csv(df, "sample_data.csv", row.names = FALSE)
+write.csv(df, "simulated_data.csv", row.names = FALSE)
