@@ -16,12 +16,13 @@ colors <- hcl.colors(num_groups, palette = "Dark2", alpha=0.5)
 normal_font_size <- 0.8
 title_font_size <- 1
 
-pdf("baser_figure.pdf", width = 8, height = 5)
-with(df, plot(x, y, main = "simulated data",
-              pch = 19, cex = 0.2/y_se, col = colors[group_id], tck = -0.02,
-              cex.main = title_font_size,
-              cex.lab = normal_font_size,
-              cex.axis=normal_font_size))
+png("baser_figure.png", width=6, height=4, units="in", res=500)
+par(pch = 19,
+    cex.main = title_font_size,
+    cex.lab = normal_font_size,
+    cex.axis = normal_font_size)
+with(df, plot(x, y, main = "Simulated Data",
+              cex = 0.2/y_se, col = colors[group_id]))
 grid()
 legend("topleft", legend = paste("group ", 1:num_groups),
        bty = "n", col = colors, pch = 19, cex = normal_font_size)
