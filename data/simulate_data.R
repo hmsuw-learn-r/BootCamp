@@ -2,6 +2,11 @@
 # ==============================================================================
 # refresh environment
 rm(list = ls())
+library(readr)
+
+# set random seed
+# ------------------------------------------------------------------------------
+set.seed(123)
 
 # problem settings
 # ------------------------------------------------------------------------------
@@ -30,4 +35,17 @@ group_id <- factor(rep(1:num_groups, each=num_points))
 # create and save data frame
 # ------------------------------------------------------------------------------
 df <- data.frame(y, y_se, x, group_id)
-write.csv(df, "simulated_data.csv", row.names = FALSE)
+write_csv(df, "simulated_data.csv")
+
+# create missing values and save data frame
+# ------------------------------------------------------------------------------
+num_na <- as.integer(0.1*num_obs)
+masked_y <- y
+masked_y_se <- y_se
+
+masked_y[sample(num_obs, size = num_na)] <- NA
+masked_y_se[sample(num_obs, size = num_na)] <- NA
+
+df_missing <- data.frame(masked_y, masked_y_se, x, group_id)
+write_csv(df_missing, "missing_data1.csv", na = "")
+write_csv(df_missing, "missing_data2.csv", na = ".")
