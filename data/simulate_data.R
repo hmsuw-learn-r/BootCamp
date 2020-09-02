@@ -47,5 +47,6 @@ masked_y[sample(num_obs, size = num_na)] <- NA
 masked_y_se[sample(num_obs, size = num_na)] <- NA
 
 df_missing <- data.frame(masked_y, masked_y_se, x, group_id)
+colnames(df_missing) <- c("y", "y_se", "x", "group_id")
 write_csv(df_missing, "missing_data1.csv", na = "")
 write_csv(df_missing, "missing_data2.csv", na = ".")
