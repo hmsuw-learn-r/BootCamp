@@ -50,3 +50,20 @@ df_missing <- data.frame(masked_y, masked_y_se, x, group_id)
 colnames(df_missing) <- c("y", "y_se", "x", "group_id")
 write_csv(df_missing, "missing_data1.csv", na = "")
 write_csv(df_missing, "missing_data2.csv", na = ".")
+
+# create simple linear regression data
+# ------------------------------------------------------------------------------
+num_points <- 100
+intercept <- 0.1
+slope <- 2
+x <- seq(0, 1, length.out = num_points)
+s <- runif(n = num_points, min = 0.1, max = 0.5)
+e <- rnorm(n = num_points, sd = s)
+y <- intercept + slope*x + e
+
+df_simple <- data.frame(
+  y = y,
+  x = x,
+  y_se = s
+)
+write_csv(df_simple, "simple_lm_data.csv")
