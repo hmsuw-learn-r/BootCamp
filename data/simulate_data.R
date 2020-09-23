@@ -35,7 +35,7 @@ group_id <- factor(rep(1:num_groups, each=num_points))
 # create and save data frame
 # ------------------------------------------------------------------------------
 df <- data.frame(y, y_se, x, group_id)
-write_csv(df, "simulated_data.csv")
+write_csv(df, "data/simulated_data.csv")
 
 # create missing values and save data frame
 # ------------------------------------------------------------------------------
@@ -48,8 +48,8 @@ masked_y_se[sample(num_obs, size = num_na)] <- NA
 
 df_missing <- data.frame(masked_y, masked_y_se, x, group_id)
 colnames(df_missing) <- c("y", "y_se", "x", "group_id")
-write_csv(df_missing, "missing_data1.csv", na = "")
-write_csv(df_missing, "missing_data2.csv", na = ".")
+write_csv(df_missing, "data/missing_data1.csv", na = "")
+write_csv(df_missing, "data/missing_data2.csv", na = ".")
 
 # create simple linear regression data
 # ------------------------------------------------------------------------------
@@ -66,4 +66,4 @@ df_simple <- data.frame(
   x = x,
   y_se = s
 )
-write_csv(df_simple, "simple_lm_data.csv")
+write_csv(df_simple, "data/simple_lm_data.csv")

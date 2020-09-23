@@ -34,4 +34,4 @@ data = cbind(info, draws)
 
 # save data
 # ------------------------------------------------------------------------------
-write_csv(data, "draws.csv")
+write_csv(data, "data/draws.csv")
