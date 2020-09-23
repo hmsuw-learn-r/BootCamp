@@ -1,6 +1,7 @@
 # Create draws for curve in the simple data set
 # ==============================================================================
 library(readr)
+library(dplyr)
 
 # problem settings
 # ------------------------------------------------------------------------------
@@ -25,12 +26,21 @@ info = data.frame(
   x = x,
   group_id = group_id
 )
+draw_matrix = outer(x*s + sin(x), i, FUN = "+")
 draws = data.frame(
-  outer(x*slope + sin(x), intercept, FUN = "+")
+  draw_matrix
 )
-names(draws) <- paste0("y_", 1:num_draws)
+draw_names <- paste0("y_", 1:num_draws)
+names(draws) <- draw_names
 
-data = cbind(info, draws)
+draws_mean <- apply(draws, mean, MARGIN = 1)
+draws_lower <- apply(draws, min, MARGIN = 1)
+draws_upper <- apply(draws, max, MARGIN = 1)
+
+data = cbind(info, draws,
+             data.frame(y_mean = draws_mean,
+                        y_lower = draws_lower,
+                        y_upper = draws_upper))
 
 # save data
 # ------------------------------------------------------------------------------
