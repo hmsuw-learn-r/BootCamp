@@ -37,11 +37,12 @@ draws_mean <- apply(draws, mean, MARGIN = 1)
 draws_lower <- apply(draws, min, MARGIN = 1)
 draws_upper <- apply(draws, max, MARGIN = 1)
 
-data = cbind(info, draws,
-             data.frame(y_mean = draws_mean,
-                        y_lower = draws_lower,
-                        y_upper = draws_upper))
+raw_draws <- cbind(info, draws)
+draws <- cbind(raw_draws, data.frame(y_mean = draws_mean,
+                                     y_lower = draws_lower,
+                                     y_upper = draws_upper))
 
 # save data
 # ------------------------------------------------------------------------------
-write_csv(data, "data/draws.csv")
+write_csv(raw_draws, "data/raw_draws.csv")
+write_csv(draws, "data/draws.csv")
